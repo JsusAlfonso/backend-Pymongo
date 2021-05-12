@@ -5,8 +5,14 @@
 from flask import Flask, jsonify, request
 from pymongo import MongoClient
 from pprint import pprint
-import globalinfo.Keys as globalkeys
-import globalinfo.Messages as globalMessages
+
+#python version 2.7.15 - 3
+# import globalinfo.Keys as globalkeys
+# import globalinfo.Messages as globalMessages
+
+#python version 3.9.5
+from .globalinfo import Messages as globalMessages
+from .globalinfo import Keys as globalkeys
 
 import json
 import sys
