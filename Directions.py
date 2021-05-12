@@ -31,7 +31,6 @@ def exampleMessage(strName,strEmail,doubWeight,doubHeight,doubTotal):
 		bolResult = callMethod.fnExampleMessage(strName,strEmail,doubWeight,doubHeight,doubTotal)
 		return bolResult
 	except Exception as e:
-		#print e
 		respuesta = {'intResp':'0'}
 		return jsonify(respuesta)
 
@@ -52,7 +51,6 @@ def postRegisterUser():
 		bolResult = callMethod.fnRegisterUser(strName,strEmail,doubWeight,doubHeight,doubTotal,strPassword)
 		return bolResult
 	except Exception as e:
-		#print e
 		respuesta = {'intResp':'0'}
 		return jsonify(respuesta)
 
@@ -66,6 +64,7 @@ def userSearch(strEmail,strPassword):
 		return jsonify(strResult)
 
 	except Exception as e:
+		print(e)
 		respuesta = {'intResp':'0'}
 		return jsonify(respuesta)
 
@@ -97,7 +96,6 @@ def putUpdateUserInfo():
 		strResult = callMethod.fnUpdateInfoUser(strUserName,strUserPwd,strToken)
 		return jsonify(strResult)
 	except Exception as e:
-		#print e
 		respuesta = {'intResp':'0',
 					 'strMessage':'Erro in the api'}
 		return jsonify(respuesta)
@@ -113,7 +111,6 @@ def deleteUserInfo():
 		strResult = callMethod.fnDeleteUser(strToken)
 		return jsonify(strResult)
 	except Exception as e:
-		#print e
 		respuesta = {'intResp':'0',
 					 'strMessage':'Erro in the api'}
 		return jsonify(respuesta)
@@ -130,7 +127,6 @@ def putUpdateIMC():
 		strResult = callMethod.fnUpdateUserIMC(doubWeight, strToken)
 		return jsonify(strResult)
 	except Exception as e:
-		#print e
 		respuesta = {'intResp':'0',
 					 'strMessage':'Erro in the api'}
 		return jsonify(respuesta)

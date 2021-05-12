@@ -57,10 +57,13 @@ def fnUserSearch(strEmail,strPassword):
 		strSearchEmail = db.clUser.find({'strEmail':strEmail})
 		strSearchEmailAndPass = db.clUser.find({'strEmail':strEmail, 'strPassword':strPassword})
 		if	strSearchEmailAndPass.count() != 0:
-
 			for userInfo in strSearchEmailAndPass:
 				
-				if userInfo.has_key('strToken'):
+				# python version 2.7.15 - 3
+				# if userInfo.has_key('strToken'):
+
+				#python version 3.9.5
+				if 'strToken' in userInfo:
 					strTokenTime = fnValidateTokenAge(userInfo['strToken'])
 
 					if strTokenTime != '0':
@@ -96,7 +99,7 @@ def fnUserSearch(strEmail,strPassword):
 				'strMessage':'user not found'
 			}
 			return i
-	except excepcion as e:
+	except Exception as e:
 		return globalMessages.err500
 
 #####################################################################
@@ -122,7 +125,7 @@ def fnRegisterUser(strName,strEmail,doubWeight,doubHeight,doubTotal,strPassword)
 		}
 		return jsonify(i)
 		
-	except excepcion as e:
+	except Exception as e:
 		return globalMessages.err500
 
 #####################################################################
@@ -189,7 +192,7 @@ def fnUserInfo(strToken):
 		else:
 			response = {'intResp':'220','strMessage':'Expired session'}
 			return response
-	except excepcion as e:
+	except Exception as e:
 		return globalMessages.err500
 
 #####################################################################
@@ -213,7 +216,7 @@ def fnUpdateInfoUser(strUserName, strUserPwd, strToken):
 			db.clUser.update({'strToken':strToken},{'$set':{'strName':strUserName}})
 			i = {'intResp':'200','strMessage':'user Modify'}
 			return i
-	except excepcion as e:
+	except Exception as e:
 		return globalMessages.err500
 
 #####################################################################
@@ -229,7 +232,7 @@ def fnDeleteUser(strToken):
 		db.clUser.remove({"strToken" : strToken})
 		i = {'intResp':'200', 'strMessage':'User Deleted'}
 		return i
-	except excepcion as e:
+	except Exception as e:
 		return globalMessages.err500
 
 #####################################################################
@@ -251,7 +254,7 @@ def fnUpdateUserIMC(doubWeight, strToken):
 		db.clUser.update({'strToken':strToken},{'$set':{'arrIMC':arrIMC}})
 		i = {'intResp':'200', 'strMessage':'IMC inserted correctly', 'arrIMC':arrIMC}
 		return i
-	except excepcion as e:
+	except Exception as e:
 		return globalMessages.err500
 
 #####################################################################
@@ -277,5 +280,5 @@ def fnOtherUserInfo(strEmail):
 		else:
 			response = {'intResp':'202', 'strMessage':'user not found'}
 			return response
-	except excepcion as e:
+	except Exception as e:
 		return globalMessages.err500
